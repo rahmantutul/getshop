@@ -8,6 +8,6 @@ require("classes/Cart.php");
 $db = new DBController();
 
 $product = new Product($db);
-$products = $product->getData(); 
+$products = $product->getData();
 $Cart = new Cart($db);
 
