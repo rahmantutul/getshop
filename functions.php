@@ -10,4 +10,3 @@ $db = new DBController();
 $product = new Product($db);
 $products = $product->getData();
 $Cart = new Cart($db);
-

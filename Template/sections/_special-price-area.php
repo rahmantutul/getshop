@@ -11,6 +11,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     }
     
   }
+
+  $in_cart =$Cart->preventDuplicateCartItem($product->getData(table:'cart'));
 ?>
 
 <section id="special-price" class="mt-5">
@@ -24,7 +26,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         <?php } ?>
     </div>
     <div class="grid">
-        <?php array_map(function($item){?>
+        <?php array_map(function($item) use($in_cart){?>
         <div class="grid-item border <?php echo $item['item_brand']?>">
             <div class="item py-2" style="width: 200px;">
                 <div class="product font-rale">
@@ -46,7 +48,13 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                     <form method="POST">
                        <input type="hidden" name="item_id" value="<?php echo $prod['item_id'] ?? 1?>"/>
                        <input type="hidden" name="user_id" value="1"/>
-                       <button type="submit" name="special_price_cart_button" class="btn btn-warning font-size-12">Add to cart</button>
+                       <?php
+                          if(in_array($item['item_id'], $in_cart ?? [])){
+                            echo '<button disabled class="btn btn-success font-size-12">Already in cart</button>';
+                          }else{
+                            echo '<button type="submit" name="top_sell_cart_button" class="btn btn-warning font-size-12">Add to cart</button>';
+                          };
+                       ?>
                     </form>
                 </div>
                 </div>

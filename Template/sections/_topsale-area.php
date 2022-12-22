@@ -37,7 +37,13 @@
                     <form method="POST">
                        <input type="hidden" name="item_id" value="<?php echo $prod['item_id'] ?? 1?>"/>
                        <input type="hidden" name="user_id" value="1"/>
-                       <button type="submit" name="top_sell_cart_button" class="btn btn-warning font-size-12">Add to cart</button>
+                       <?php
+                          if(in_array($prod['item_id'], $Cart->preventDuplicateCartItem($product->getData(table:'cart')) ?? [])){
+                              echo '<button disabled class="btn btn-success font-size-12">Already in cart</button>';
+                          }else{
+                              echo '<button type="submit" name="top_sell_cart_button" class="btn btn-warning font-size-12">Add to cart</button>';
+                          };
+                      ?>
                     </form>
                     </div>
                 </div>

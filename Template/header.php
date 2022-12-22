@@ -58,9 +58,9 @@
               </ul>
 
               <form action="#" class="font-rale font-size-16">
-                <a href="" class="py-2 rounded-pill color-primary-bg">
+                <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
                   <span class="font-size-16 px-2 text-white"><i class="fa fa-shopping-cart"></i></span>
-                  <span class="px-3 py-2 rounded-pill text-dark bg-light">O</span>
+                  <span class="px-3 py-2 rounded-pill text-dark bg-light"><?php echo count($product->getData(table:'cart')) ?></span>
                 </a>
               </form>
             </div>

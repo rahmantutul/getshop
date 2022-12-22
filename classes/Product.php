@@ -17,4 +17,14 @@ class Product
     }
     return $resultArray;
    }
+   public function getSpecificData( $table="product" ,$itemId=null){
+       if(isset($itemId)){
+         $result= $this->db->conn->query("SELECT * FROM {$table} WHERE item_id={$itemId}");
+          //   fetch data
+         while($item= mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $resultData[]=$item; 
+         }
+         return $resultData;
+       }
+   }
 }

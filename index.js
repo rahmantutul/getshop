@@ -77,6 +77,9 @@ $(document).ready(function(){
 
 //  Up button 
  $qty_up.click(function(e){
+    console.log("Okay");
+    $.ajax({uri: 'Template/ajax.php', type:'post', data: {item_id:$(this).data("id")}, success: function(result){ console.log(result)}});
+
     $input =$(`.qty_input[data-id='${$(this).data("id")}']`);
     if($input.val() >=1 && $input.val() <=9){
         $input.val(function(i, oldval){

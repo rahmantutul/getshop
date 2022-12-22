@@ -26,6 +26,7 @@ class Cart {
     }
 
     public function addToCart($userId, $itemId){
+        
         if(isset($userId) && isset($itemId)){
             $params= array(
                 'user_id'=>$userId,
@@ -36,5 +37,34 @@ class Cart {
                 header("Location:".$_SERVER['PHP_SELF']);
             }
         }
+    }
+   public function deleteCartItem($id=null, $table='cart'){
+    //  return print_r($id);
+      if($id != null){
+        $result = $this->db->conn->query("DELETE FROM {$table} WHERE item_id= {$id}");
+        if($result){
+            header("Location:", $_SERVER['PHP_SELF']);
+        }
+        return $result;
+      }
+      
+   }
+    public function getSum($arr){
+        $sum = 0;
+        if(isset($arr)){
+            foreach($arr as $item){
+                $sum+= floatval($item[0]);
+            }
+        }
+        return sprintf("%.2f",$sum);
+    }
+
+    public function preventDuplicateCartItem($cartArray= null, $key='item_id'){
+       if($cartArray != null){
+        $cartId=array_map(function($value) use ($key){
+             return $value[$key];
+          }, $cartArray);
+          return $cartId;
+       }
     }
 }
